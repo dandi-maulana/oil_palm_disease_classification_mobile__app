@@ -24,6 +24,15 @@ class AppProvider with ChangeNotifier {
     _errorMessage = null;
     notifyListeners();
   }
+  
+  // FUNGSI BARU: Untuk mereset semua state
+  void reset() {
+      _isLoading = false;
+      _predictionResult = null;
+      _errorMessage = null;
+      _selectedImage = null;
+      notifyListeners();
+  }
 
   Future<void> getPrediction() async {
     if (_selectedImage == null) {
