@@ -26,8 +26,13 @@ class DiseaseDetailScreen extends StatelessWidget {
               width: double.infinity,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage(disease.imagePath),
+                  // === PERBAIKAN DI SINI: Menggunakan Image.network ===
+                  image: NetworkImage(disease.imagePath),
                   fit: BoxFit.cover,
+                  // Menambahkan error builder jika gambar gagal dimuat
+                  onError: (exception, stackTrace) {
+                    print('Error loading image: $exception');
+                  },
                 ),
               ),
               child: Container(
@@ -58,7 +63,7 @@ class DiseaseDetailScreen extends StatelessWidget {
                 ),
               ),
             ),
-            
+
             // --- Kartu Informasi ---
             Padding(
               padding: const EdgeInsets.all(16.0),
@@ -95,7 +100,6 @@ class DiseaseDetailScreen extends StatelessWidget {
   }) {
     return Card(
       elevation: 2,
-      // === WARNA KARTU DIPERBARUI DI SINI ===
       color: Colors.blue[50],
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: Padding(
